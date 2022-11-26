@@ -9,7 +9,6 @@
                 <a href="product" class="btn btn-outline-primary">Show Products</a>
             </div> -->
 	@foreach ($categories as $category)
-
     <x-category-items :category="$category"/>    
   
         @endforeach

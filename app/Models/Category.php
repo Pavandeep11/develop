@@ -14,6 +14,15 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+    public function parent()
+    {
+        return $this->belongsTo('App\Category', 'parent_id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product');
+    } 
 
     public function childrenRecursive()
     {
