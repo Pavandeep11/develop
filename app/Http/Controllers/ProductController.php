@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all(); //fetch all products from DB
-        return view('product.list', ['products' => $products]);
+       // $products = Product::all(); //fetch all products from DB
+       // $categories = Category::with('childrenRecursive')->whereNull('parent_id')->get();
+       $categories = Category::with('childrenRecursive')->whereNull('parent_id')->get();
+        return view('welcome')->with('categories', $categories);
     }
 
     public function create()

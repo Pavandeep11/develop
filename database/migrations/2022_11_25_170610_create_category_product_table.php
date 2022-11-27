@@ -14,9 +14,9 @@ class CreateCategoryProductTable extends Migration
     public function up()
     {
         Schema::create('category_product', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('product_id');
+            $table->bigInteger('id')->unsigned();
+            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->unsignedBigInteger('product_id')->unsigned();
             // foreign keys
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('product_id')->references('id')->on('products');
