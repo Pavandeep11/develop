@@ -17,9 +17,6 @@ class CreateCategoryProductTable extends Migration
             $table->bigInteger('id')->unsigned();
             $table->unsignedBigInteger('category_id')->unsigned();
             $table->unsignedBigInteger('product_id')->unsigned();
-            // foreign keys
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

@@ -9,10 +9,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-       // $products = Product::all(); //fetch all products from DB
-       // $categories = Category::with('childrenRecursive')->whereNull('parent_id')->get();
-       $categories = Category::with('childrenRecursive')->whereNull('parent_id')->get();
-        return view('welcome')->with('categories', $categories);
+        $categories = Category::with('childrenRecursive')->whereNull('parent_id')->get();
+        return view('category')->with('categories', $categories);
     }
 
     public function create()
@@ -20,15 +18,21 @@ class ProductController extends Controller
         return view('product.add');
     }
 
+    public function show(){
+        return view('layouts\addproduct', [
+            'categories' => Category::all()
+        ]);
+    }
     public function store(Request $request)
     {
-        $newPost = Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
             'active' => $request->active
         ]);
-        
-        return redirect('product/' . $newPost->id . '/edit');
+        $active['active'] = $request->active;
+        $product->categories()->attach($request->category_id,$active);
+        return redirect('/');
     }
 
 }
